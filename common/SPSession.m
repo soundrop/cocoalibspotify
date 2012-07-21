@@ -58,6 +58,7 @@
 @interface SPSession ()
 
 @property (nonatomic, readwrite, strong) SPUser *user;
+@property (nonatomic, readwrite, strong) NSString *country;
 @property (nonatomic, readwrite, strong) NSLocale *locale;
 
 @property (nonatomic, readwrite) sp_connectionstate connectionState;
@@ -985,14 +986,17 @@ static SPSession *sharedSession;
 				});
 				
 				SPDispatchAsync(^() {
-					int encodedLocale = sp_session_user_country(self.session);
-					char localeId[3];
-					localeId[0] = encodedLocale >> 8 & 0xFF;
-					localeId[1] = encodedLocale & 0xFF;
-					localeId[2] = 0;
-					NSString *localeString = [NSString stringWithUTF8String:(const char *)&localeId];
-					NSLocale *newLocale = [[NSLocale alloc] initWithLocaleIdentifier:localeString];
-					dispatch_async(dispatch_get_main_queue(), ^() { self.locale = newLocale; });
+					int packedCountry = sp_session_user_country(self.session);
+					char utfCountry[3];
+					utfCountry[0] = packedCountry >> 8 & 0xFF;
+					utfCountry[1] = packedCountry & 0xFF;
+					utfCountry[2] = 0;
+					NSString *newCountry = [NSString stringWithUTF8String:utfCountry];
+					NSLocale *newLocale = [[NSLocale alloc] initWithLocaleIdentifier:newCountry];
+					dispatch_async(dispatch_get_main_queue(), ^() {
+						self.country = newCountry;
+						self.locale = newLocale;
+					});
 				});
 			}
             
@@ -1001,6 +1005,7 @@ static SPSession *sharedSession;
 				self.starredPlaylist = nil;
 				self.userPlaylists = nil;
 				self.user = nil;
+				self.country = nil;
 				self.locale = nil;
             }
             return;
@@ -1017,6 +1022,7 @@ static SPSession *sharedSession;
 	self.starredPlaylist = nil;
 	self.userPlaylists = nil;
 	self.user = nil;
+	self.country = nil;
 	self.locale = nil;
 	self.connectionState = SP_CONNECTION_STATE_LOGGED_OUT;
 	
@@ -1054,6 +1060,7 @@ static SPSession *sharedSession;
 @synthesize starredPlaylist;
 @synthesize userPlaylists;
 @synthesize user;
+@synthesize country;
 @synthesize locale;
 @synthesize offlineSyncError;
 @synthesize userAgent;

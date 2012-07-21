@@ -380,6 +380,9 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 @property (nonatomic, readonly, strong) SPPlaylist *inboxPlaylist;
 
+/** Returns the country of the logged-in user. */
+@property (nonatomic, readonly, strong) NSString *country;
+
 /** Returns the locale of the logged-in user. */
 @property (nonatomic, readonly, strong) NSLocale *locale;
 

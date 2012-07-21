@@ -397,6 +397,54 @@ static void streaming_error(sp_session *session, sp_error errorCode) {
 	}
 }
 
+// Called when audio playback should start
+void start_playback(sp_session *session) {
+	SPSession *sess = (__bridge SPSession *)sp_session_userdata(session);
+
+	@autoreleasepool {
+
+		dispatch_async(dispatch_get_main_queue(), ^{
+
+			SEL selector = @selector(sessionShouldStartPlayback:);
+			if ([[sess playbackDelegate] respondsToSelector:selector]) {
+				[(NSObject *)[sess playbackDelegate] performSelectorOnMainThread:selector
+																	  withObject:sess
+																   waitUntilDone:NO];
+			}
+		});
+    }
+}
+
+// Called when audio playback should stop
+void stop_playback(sp_session *session) {
+	SPSession *sess = (__bridge SPSession *)sp_session_userdata(session);
+
+	@autoreleasepool {
+
+		dispatch_async(dispatch_get_main_queue(), ^{
+
+			SEL selector = @selector(sessionShouldStopPlayback:);
+			if ([[sess playbackDelegate] respondsToSelector:selector]) {
+				[(NSObject *)[sess playbackDelegate] performSelectorOnMainThread:selector
+																	  withObject:sess
+																   waitUntilDone:NO];
+			}
+		});
+    }
+}
+
+// Called to query application about its audio buffer
+void get_audio_buffer_stats(sp_session *session, sp_audio_buffer_stats *stats) {
+	SPSession *sess = (__bridge SPSession *)sp_session_userdata(session);
+
+	@autoreleasepool {
+
+        if ([[sess playbackDelegate] respondsToSelector:@selector(session:queryAudioStats:)]) {
+            [[sess playbackDelegate] session:sess queryAudioStats:stats];
+        }
+    }
+}
+
 // Called when offline synchronization status is updated
 static void offline_status_updated(sp_session *session) {
 	
@@ -574,6 +622,9 @@ static sp_session_callbacks _callbacks = {
 	.log_message = &log_message,
 	.end_of_track = &end_of_track,
 	.streaming_error = &streaming_error,
+	.start_playback = &start_playback,
+	.stop_playback = &stop_playback,
+	.get_audio_buffer_stats = &get_audio_buffer_stats,
 	.offline_status_updated = &offline_status_updated,
 	.offline_error = &offline_error,
 	.credentials_blob_updated = &credentials_blob_updated,

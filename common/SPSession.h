@@ -758,6 +758,10 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 -(void)session:(id <SPSessionPlaybackProvider>)aSession didEncounterStreamingError:(NSError *)error;
 
+-(void)sessionShouldStartPlayback:(SPSession *)aSession;
+-(void)sessionShouldStopPlayback:(SPSession *)aSession;
+-(void)session:(SPSession *)aSession queryAudioStats:(sp_audio_buffer_stats *)stats;
+
 /** Called when audio data has been decompressed and should be pushed to the audio buffers. 
  
  See the SimplePlayback sample project for an example of how to implement audio playback.

@@ -14,16 +14,16 @@
  * Redistributions in binary form must reproduce the above copyright
  notice, this list of conditions and the following disclaimer in the
  documentation and/or other materials provided with the distribution.
- * Neither the name of Spotify AB nor the names of its contributors may 
- be used to endorse or promote products derived from this software 
+ * Neither the name of Spotify AB nor the names of its contributors may
+ be used to endorse or promote products derived from this software
  without specific prior written permission.
  
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
  DISCLAIMED. IN NO EVENT SHALL SPOTIFY AB BE LIABLE FOR ANY DIRECT, INDIRECT,
- INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
- LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
@@ -76,11 +76,11 @@
 		self.session = sess;
 		self.modalPresentationStyle = UIModalPresentationFormSheet;
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self 
+		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(sessionDidFailToLogin:)
 													 name:SPSessionLoginDidFailNotification
 												   object:self.session];
-
+        
 		self.allowsCancel = YES;
 		self.title = @"Spotify";
 		
@@ -125,13 +125,13 @@
 											  cancelButtonTitle:@"OK"
 											  otherButtonTitles:nil];
 		[alert show];
-
+        
 		return;
 	}
-
+    
 	[self.session attemptLoginWithUserName:self.usernameField.text
-                                password:self.passwordField.text];
-
+                                  password:self.passwordField.text];
+    
 	[self switchViewToLoggingInState:YES];
 	
 }
@@ -199,13 +199,13 @@
 	blueRect.image = [UIImage imageWithContentsOfFile:[resourcesBundle pathForResource:@"SPLoginViewFacebookBackground" ofType:@"png"]];
 	[loginContainerView addSubview:blueRect];
 	
-	UIImageView *facebookIcon = [[UIImageView alloc] initWithFrame:CGRectMake(30.0, 29.0, 22.0, 23.0)];
-	facebookIcon.contentMode = UIViewContentModeBottom;
-	facebookIcon.image = [UIImage imageWithContentsOfFile:[resourcesBundle pathForResource:@"SPLoginViewFacebookIcon" ofType:@"png"]];
-	[blueRect addSubview:facebookIcon];
+    //	UIImageView *facebookIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 29.0, 22.0, 23.0)];
+    //	facebookIcon.contentMode = UIViewContentModeBottom;
+    //	facebookIcon.image = [UIImage imageWithContentsOfFile:[resourcesBundle pathForResource:@"SPLoginViewFacebookIcon" ofType:@"png"]];
+    //	[blueRect addSubview:facebookIcon];
 	
-	UILabel *loginHeader = [[UILabel alloc] initWithFrame:CGRectMake(59.0, 30.0, 212.0, 21.0)];
-	loginHeader.text = @"Login with Facebook or Spotify";
+	UILabel *loginHeader = [[UILabel alloc] initWithFrame:CGRectMake(25.0, 14.0, 260.0, 42)];
+	loginHeader.text = @"To play music, please login to Spotify";
 	loginHeader.textColor = [UIColor whiteColor];
 	loginHeader.font = [UIFont boldSystemFontOfSize:14.0];
 	loginHeader.shadowColor = [UIColor colorWithWhite:0.2 alpha:1.0];
@@ -213,7 +213,7 @@
 	loginHeader.backgroundColor = [UIColor clearColor];
 	[blueRect addSubview:loginHeader];
 	
-	self.loginFormView = [[UIView alloc] initWithFrame:CGRectMake(20.0, 77.0, 260.0, 87.0)];
+	self.loginFormView = [[UIView alloc] initWithFrame:CGRectMake(20.0, 66.0, 260.0, 87.0)];
 	[loginContainerView addSubview:self.loginFormView];
 	
 	UIImageView *textFieldBg = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 260.0, 87.0)];
@@ -224,7 +224,7 @@
 	self.loginAreaSeparator = [[UIView alloc] initWithFrame:CGRectMake(0.0, 43.0, 260.0, 1.0)];
 	[self.loginAreaSeparator setBackgroundColor:[UIColor colorWithWhite:0.54 alpha:1.0]];
 	[self.loginFormView addSubview:self.loginAreaSeparator];
-
+    
 	self.loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 12.0, 69.0, 21.0)];
 	self.loginLabel.text = @"Username";
 	self.loginLabel.font = [UIFont boldSystemFontOfSize:14.0];
@@ -314,14 +314,14 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
 	previousStyle = [[UIApplication sharedApplication] statusBarStyle];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
 	[[UIApplication sharedApplication] setStatusBarStyle:previousStyle animated:animated];
-
+    
     [super viewWillDisappear:animated];
 }
 

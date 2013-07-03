@@ -119,7 +119,7 @@
 - (IBAction)performLogin:(id)sender {
 	
 	if (self.usernameField.text.length == 0 || self.passwordField.text.length == 0) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed"
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign-in failed"
 														message:@"Please enter your username and password."
 													   delegate:nil
 											  cancelButtonTitle:@"OK"
@@ -148,7 +148,7 @@
 	
 	NSError *error = [[notification userInfo] valueForKey:SPSessionLoginDidFailErrorKey];
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed"
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign-in failed"
 													message:[error localizedDescription]
 												   delegate:nil
 										  cancelButtonTitle:@"OK"
@@ -211,6 +211,8 @@
 	loginHeader.shadowColor = [UIColor colorWithWhite:0.2 alpha:1.0];
 	loginHeader.shadowOffset = CGSizeMake(0.0, -1.0);
 	loginHeader.backgroundColor = [UIColor clearColor];
+	loginHeader.numberOfLines = 1;
+	loginHeader.adjustsFontSizeToFitWidth = YES;
 	[blueRect addSubview:loginHeader];
 	
 	self.loginFormView = [[UIView alloc] initWithFrame:CGRectMake(20.0, 66.0, 260.0, 87.0)];
@@ -257,7 +259,7 @@
 	self.loggingInView.backgroundColor = [UIColor whiteColor];
 	
 	UILabel *loggingInLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 14.0, 127.0, 21.0)];
-	loggingInLabel.text = @"Logging in…";
+	loggingInLabel.text = @"Signing in…";
 	loggingInLabel.font = [UIFont systemFontOfSize:14.0];
 	loggingInLabel.textColor = [UIColor colorWithWhite:0.3 alpha:1.0];
 	loggingInLabel.backgroundColor = [UIColor whiteColor];

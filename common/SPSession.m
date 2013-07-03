@@ -403,15 +403,9 @@ void start_playback(sp_session *session) {
 
 	@autoreleasepool {
 
-		dispatch_async(dispatch_get_main_queue(), ^{
-
-			SEL selector = @selector(sessionShouldStartPlayback:);
-			if ([[sess playbackDelegate] respondsToSelector:selector]) {
-				[(NSObject *)[sess playbackDelegate] performSelectorOnMainThread:selector
-																	  withObject:sess
-																   waitUntilDone:NO];
-			}
-		});
+        if ([[sess playbackDelegate] respondsToSelector:@selector(sessionShouldStartPlayback:)]) {
+            [[sess playbackDelegate] sessionShouldStartPlayback:sess];
+        }
     }
 }
 
@@ -421,15 +415,9 @@ void stop_playback(sp_session *session) {
 
 	@autoreleasepool {
 
-		dispatch_async(dispatch_get_main_queue(), ^{
-
-			SEL selector = @selector(sessionShouldStopPlayback:);
-			if ([[sess playbackDelegate] respondsToSelector:selector]) {
-				[(NSObject *)[sess playbackDelegate] performSelectorOnMainThread:selector
-																	  withObject:sess
-																   waitUntilDone:NO];
-			}
-		});
+        if ([[sess playbackDelegate] respondsToSelector:@selector(sessionShouldStopPlayback:)]) {
+            [[sess playbackDelegate] sessionShouldStopPlayback:sess];
+        }
     }
 }
 

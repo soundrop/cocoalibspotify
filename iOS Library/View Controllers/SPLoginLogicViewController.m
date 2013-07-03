@@ -204,8 +204,8 @@
     //	facebookIcon.image = [UIImage imageWithContentsOfFile:[resourcesBundle pathForResource:@"SPLoginViewFacebookIcon" ofType:@"png"]];
     //	[blueRect addSubview:facebookIcon];
 	
-	UILabel *loginHeader = [[UILabel alloc] initWithFrame:CGRectMake(25.0, 14.0, 260.0, 42)];
-	loginHeader.text = @"To play music, please login to Spotify";
+	UILabel *loginHeader = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 14.0, 260.0, 42)];
+	loginHeader.text = @"To play music, please sign in to Spotify";
 	loginHeader.textColor = [UIColor whiteColor];
 	loginHeader.font = [UIFont boldSystemFontOfSize:14.0];
 	loginHeader.shadowColor = [UIColor colorWithWhite:0.2 alpha:1.0];
@@ -277,7 +277,7 @@
 														target:self
 														action:@selector(cancel:)];
 	
-	self.loginButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In"
+	self.loginButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign In"
 														style:UIBarButtonItemStyleBordered
 													   target:self
 													   action:@selector(performLogin:)];

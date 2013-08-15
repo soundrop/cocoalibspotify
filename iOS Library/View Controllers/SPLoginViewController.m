@@ -48,6 +48,8 @@
 
 @property (nonatomic, readwrite) BOOL waitingForFacebookPermissions;
 
+@property (nonatomic, weak) UIAlertView* alertView;
+
 @end
 
 @implementation SPLoginViewController
@@ -132,6 +134,7 @@ static NSMutableDictionary *loginControllerCache;
 															   delegate:self
 													  cancelButtonTitle:@"Show terms"
 													  otherButtonTitles:@"Accept", nil];
+                self.alertView = alert;
 				[alert show];
 			}
 			
@@ -232,6 +235,9 @@ static NSMutableDictionary *loginControllerCache;
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
+    
+    [self.alertView dismissWithClickedButtonIndex:self.alertView.firstOtherButtonIndex animated:NO];
+    
 	// Since we're a shared instance reset state
 	SPLoginLogicViewController *root = [[self viewControllers] objectAtIndex:0];
 	[root resetState];

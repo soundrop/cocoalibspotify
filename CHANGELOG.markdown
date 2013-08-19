@@ -1,3 +1,16 @@
+CocoaLibSpotify 2.4.5 for libspotify 12, release August 12th, 2013
+==================================================================
+
+* libspotify cache and offline sync directories are no longer backed up to iCloud.
+
+CocoaLibSpotify 2.4.4 for libspotify 12, released June 27th 2013
+================================================================
+
+* Uses libspotify 12.1.64 for iOS, which provides:
+    * Fixes an issue that would cause a crash on login in certain circumstances.
+
+* `-[SPSession attemptLoginWithUserName:existingCredential:]` should no longer hang for five minutes on iOS hardware.
+
 CocoaLibSpotify 2.4.3 for libspotify 12, released May 20th 2013
 ===============================================================
 
@@ -8,7 +21,7 @@ CocoaLibSpotify 2.4.3 for libspotify 12, released May 20th 2013
 
 * `SPDispatchSyncIfNeeded` and `SPDispatchAsync` are now declared as inline functions rather than macros to aid debugging.
 
-* Unit tests output the version of libspotify being used at runtime. 
+* Unit tests output the version of libspotify being used at runtime.
 
 CocoaLibSpotify 2.4.2 for libspotify 12, released January 29th 2013
 ===================================================================

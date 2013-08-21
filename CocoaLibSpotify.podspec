@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     =  'https://github.com/spotify/cocoalibspotify'
   s.summary      =  'A Cocoa wrapper for libspotify.'
   s.description  =  "CocoaLibSpotify is an Objective-C wrapper around our libspotify library. It provides easy access to libspotify's features in a friendly, KVC/O compliant Objective-C wrapper."
-  s.source       =  { :git => 'https://github.com/spotify/cocoalibspotify.git', :tag => "2.4.5" }
+  s.source       =  { :git => 'https://github.com/soundrop/cocoalibspotify.git', :tag => "2.4.5_Soundrop" }
   s.requires_arc =  true
   s.preserve_paths = 'libspotify-12.1.64-iOS-universal'
   s.source_files =  'common', 'iOS Library/View Controllers', 'libspotify-12.1.64-iOS-universal/libspotify.framework/Versions/12.1.64/Headers'

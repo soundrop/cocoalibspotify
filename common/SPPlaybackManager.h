@@ -99,6 +99,14 @@
  */
 -(void)playTrack:(SPTrack *)aTrack callback:(SPErrorableOperationCallback)block;
 
+/** Plays the given track.
+ 
+ @param aTrack The track that should be played.
+ @param offset offset The time at which to start playing from. Must be between 0.0 and the duration of the track.
+ @param block The `SPErrorableOperationCallback` block to be called with an `NSError` if playback failed or `nil` if playback started successfully.
+ */
+-(void)playTrack:(SPTrack *)aTrack offset:(NSTimeInterval)offset callback:(SPErrorableOperationCallback)block;
+
 /** Seek the current playback position to the given time. 
  
  @param newPosition The time at which to seek to. Must be between 0.0 and the duration of the playing track.

@@ -121,7 +121,7 @@ static void * const kSPPlaybackManagerKVOContext = @"kSPPlaybackManagerKVOContex
     [self playTrack:aTrack offset:0.0 callback:block];
 }
 
--(void)playTrack:(SPTrack *)aTrack offset:(NSTimeInterval)offset callback:(SPErrorableOperationCallback)blockk {
+-(void)playTrack:(SPTrack *)aTrack offset:(NSTimeInterval)offset callback:(SPErrorableOperationCallback)block {
 	
 	self.playbackSession.playing = NO;
 	[self.playbackSession unloadPlayback];

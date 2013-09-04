@@ -118,6 +118,10 @@ static void * const kSPPlaybackManagerKVOContext = @"kSPPlaybackManagerKVOContex
 @synthesize currentTrack;
 
 -(void)playTrack:(SPTrack *)aTrack callback:(SPErrorableOperationCallback)block {
+    [self playTrack:aTrack offset:0.0 callback:block];
+}
+
+-(void)playTrack:(SPTrack *)aTrack offset:(NSTimeInterval)offset callback:(SPErrorableOperationCallback)blockk {
 	
 	self.playbackSession.playing = NO;
 	[self.playbackSession unloadPlayback];
@@ -131,7 +135,7 @@ static void * const kSPPlaybackManagerKVOContext = @"kSPPlaybackManagerKVOContex
 	self.currentTrack = aTrack;
 	self.trackPosition = 0.0;
 	
-	[self.playbackSession playTrack:self.currentTrack callback:^(NSError *error) {
+	[self.playbackSession playTrack:self.currentTrack offset:offset callback:^(NSError *error) {
 		
 		if (!error)
 			self.playbackSession.playing = YES;

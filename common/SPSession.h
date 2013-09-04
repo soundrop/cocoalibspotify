@@ -149,6 +149,12 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 								   loadingPolicy:(SPAsyncLoadingPolicy)policy
 										   error:(NSError **)error;
 
+
+/**
+ Destroys the session singleton
+ */
++ (void)clearSession;
+
 /** The "debug" build ID of libspotify.
 
  This could be useful to display somewhere deep down in the user interface in
@@ -608,7 +614,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** Start playing the given track from a specific offset.
 
  @param aTrack The track to play.
- @offset offset The time at which to start playing from. Must be between 0.0 and the duration of the track.
+ @param offset offset The time at which to start playing from. Must be between 0.0 and the duration of the track.
  @param block A block to be called when operation has successfully begun. The error parameter will be non-`nil` is an error occurred.
  */
 -(void)playTrack:(SPTrack *)aTrack offset:(NSTimeInterval)offset callback:(SPErrorableOperationCallback)block;

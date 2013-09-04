@@ -767,6 +767,11 @@ static SPSession *sharedSession;
 	return YES;
 }
 
++ (void)clearSession
+{
+    sharedSession = nil;
+}
+
 +(NSString *)libSpotifyBuildId {
 	 return [NSString stringWithUTF8String:sp_build_id()];
 }

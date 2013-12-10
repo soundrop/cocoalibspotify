@@ -49,6 +49,12 @@
  */
 -(void)playbackManagerWillStartPlayingAudio:(SPPlaybackManager *)aPlaybackManager;
 
+/** Called when audio stops playing because play token has been lost
+ 
+ @param aPlaybackManager The playback manager that started playing.
+ */
+-(void)playbackManagerDidLosePlayToken:(SPPlaybackManager *)aPlaybackManager;
+
 @end
 
 /**

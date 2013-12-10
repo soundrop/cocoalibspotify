@@ -191,11 +191,11 @@ static void * const kSPPlaybackManagerKVOContext = @"kSPPlaybackManagerKVOContex
 #pragma mark Playback Callbacks
 
 -(void)sessionDidLosePlayToken:(SPSession *)aSession {
-
+    
 	// This delegate is called when playback stops because the Spotify account is being used for playback elsewhere.
-	// In practice, playback is only paused and you can call [SPSession -setIsPlaying:YES] to start playback again and 
+	// In practice, playback is only paused and you can call [SPSession -setIsPlaying:YES] to start playback again and
 	// pause the other client.
-
+    [self informDelegateOfPlayTokenLost];
 }
 
 -(void)sessionDidEndPlayback:(SPSession *)aSession {
@@ -209,9 +209,20 @@ static void * const kSPPlaybackManagerKVOContext = @"kSPPlaybackManagerKVOContex
 }
 
 -(void)sessionDidEndPlaybackOnMainThread:(SPSession *)aSession {
-	self.currentTrack = nil;	
+	self.currentTrack = nil;
 }
 
+- (void)informDelegateOfPlayTokenLost
+{
+    if (![NSThread isMainThread]) {
+		[self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:NO];
+		return;
+	}
+    
+    if ([self.delegate respondsToSelector:@selector(playbackManagerDidLosePlayToken:)]) {
+        [self.delegate playbackManagerDidLosePlayToken:self];
+    }
+}
 
 -(void)informDelegateOfAudioPlaybackStarting {
 	if (![NSThread isMainThread]) {
